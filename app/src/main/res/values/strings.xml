@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">RESTapiDemo</string>
+    <string name="get_city">Get city name</string>
+    <string name="get_city_id">Get city ID</string>
+</resources>
