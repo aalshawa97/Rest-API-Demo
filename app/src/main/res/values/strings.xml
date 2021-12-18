@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RESTapiDemo</string>
-    <string name="get_city">Get city name</string>
+    <string name="get_city">Weather by ID</string>
     <string name="get_city_id">Get city ID</string>
     <string name="data_input">Enter city id</string>
+    <string name="weather_by_name">Weather by name</string>
 </resources>

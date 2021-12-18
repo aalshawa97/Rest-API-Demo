@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 //JSON meta data: https://www.metaweather.com/api/location/44418/
 public class MainActivity extends AppCompatActivity {
     Button btn_cityID, btn_cityName, btn_getWeatherByID, getBtn_getWeatherByName;
@@ -30,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Log statement to assure us that we have gotten here
                 Log.d("Ran","Searching for the city ID");
+                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+                String url = "https://www.metaweather.com/api/location/search/?query=london";
+
+                //Test a string response from the provided URL.
+                //StringRequest stringRequest =
 
                 //displayDecryptedChatMessageCaesar();
                 //Now prompt the user for the key to use for decrypting the message
