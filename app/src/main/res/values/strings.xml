@@ -2,4 +2,5 @@
     <string name="app_name">RESTapiDemo</string>
     <string name="get_city">Get city name</string>
     <string name="get_city_id">Get city ID</string>
+    <string name="data_input">Enter city id</string>
 </resources>
