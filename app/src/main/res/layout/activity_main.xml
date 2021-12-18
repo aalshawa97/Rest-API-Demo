@@ -30,12 +30,12 @@
 
     <EditText
         android:id="@+id/et_dataInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="401dp"
+        android:layout_height="47dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="19dp"
-        android:minHeight="48dp"
         android:inputType="text"
+        android:minHeight="48dp"
         android:text="@string/data_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weather_name" />
