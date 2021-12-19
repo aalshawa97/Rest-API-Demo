@@ -1,4 +1,5 @@
 package com.example.restapidemo;
+import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,8 +16,19 @@ import java.util.List;
 
 public class WeatherDataService {
     private static String query = "https://www.metaweather.com/api/location/search/?query=";
+    Context context;
+    public WeatherDataService(Context context){
+        this.context = context;
+    }
+
+    public WeatherDataService() {
+
+    }
+
     public static String getCityID(String cityName){
         String url = query + cityName;
+        Context context;
+
 
         JsonArrayRequest request = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
             /**
@@ -40,6 +52,8 @@ public class WeatherDataService {
                 Log.d("Weather data service", "onErrorResponse: ");
             }
         });
+
+
 
         /*
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
