@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         getBtn_getWeatherByName = findViewById(R.id.weather_name);
         btn_getWeatherByID = findViewById(R.id.btn_getWeatherById);
         et_dataInput = findViewById(R.id.et_dataInput);
+        lv_weatherReport = findViewById(R.id.weather_data);
 
         //Set the listeners for each button
         btn_getWeatherByID.setOnClickListener(new View.OnClickListener(){
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             //This method runs everytime the city ID button is clicked
             public void onClick(View v) {
+                WeatherDataService weatherDataService = new WeatherDataService();
+                String cityID = WeatherDataService.getCityID(et_dataInput.getText().toString());
                 Toast.makeText(MainActivity.this, "You clicked get city by ID", Toast.LENGTH_LONG);
                 Log.d("Ran","Searching for the city ID");
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
@@ -67,7 +70,8 @@ public class MainActivity extends AppCompatActivity {
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        JSONObject cityInfo;
+                        JSONObject cityInfo = null;
+                        //cityID = cityInfo.getString("woeid");
                         Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                     }
                 },
@@ -77,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Something is wrong.", Toast.LENGTH_SHORT).show();
                     }
                 });
+                queue.add(request);
                 //Test a string response from the provided URL.
                 //StringRequest stringRequest =
 
@@ -84,10 +89,18 @@ public class MainActivity extends AppCompatActivity {
                 //Now prompt the user for the key to use for decrypting the message
                 //DecryptionPopup decryptionPopup = new DecryptionPopup();
                 //startActivity(new Intent(MainActivityJ.this,DecryptionPopup.class));
+                //MySingleton.getInstance(MainActivity.this).addRequestToQueue(request);
             }
 
         });
         /*
+        btn_cityID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //This method runs everytime the city ID button is clicked
+            public void onClick(View v) {
+            }
+            });
+
         btn_cityID.setOnClickListener ({
 
         });
