@@ -16,7 +16,7 @@ import java.util.List;
 
 public class WeatherDataService {
     private static String query = "https://www.metaweather.com/api/location/search/?query=";
-    Context context;
+    private static Context context = null;
     public WeatherDataService(Context context){
         this.context = context;
     }
@@ -27,7 +27,6 @@ public class WeatherDataService {
 
     public static String getCityID(String cityName){
         String url = query + cityName;
-        Context context;
 
 
         JsonArrayRequest request = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
@@ -42,7 +41,7 @@ public class WeatherDataService {
                     JSONObject cityInfo = null;
                     String cityID = cityInfo.getString("woeid");
                 } catch (Exception e) {
-
+                    e.printStackTrace();
                 }
                 //Toast.makeText(WeatherDataService.this, response.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -52,7 +51,8 @@ public class WeatherDataService {
                 Log.d("Weather data service", "onErrorResponse: ");
             }
         });
-
+        MySingleton.getInstance(context).addToRequestQueue(request);
+        //MySingleton singleton
 
 
         /*

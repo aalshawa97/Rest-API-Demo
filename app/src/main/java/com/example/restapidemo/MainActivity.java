@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
+
         btn_cityID.setOnClickListener(new View.OnClickListener() {
             @Override
             //This method runs everytime the city ID button is clicked
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 queue.add(request);
+                MySingleton.getInstance(MainActivity.this).addToRequestQueue(request);
                 //Test a string response from the provided URL.
                 //StringRequest stringRequest =
 
