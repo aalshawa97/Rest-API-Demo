@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     String cityName = "Phoenix";
     //WeatherDataService weatherDataService = new WeatherDataService();
 
-    public void getCityForecaseByID(String cityID) {
+    public void getCityForecastByID(String cityID) {
         List<WeatherReportModel> report = new ArrayList<>();
         String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityID;
 
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.d("Error:", "onErrorResponse: Not able to get the city by ID");
             }
 
         });

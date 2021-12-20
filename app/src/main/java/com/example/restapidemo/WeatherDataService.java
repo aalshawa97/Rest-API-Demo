@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherDataService {
-    private static final String QUERY_FOR_CITY_WEATHER_BY_ID = "";
+    private static final String QUERY_FOR_CITY_WEATHER_BY_ID = "London";
     private static String query = "https://www.metaweather.com/api/location/search/?query=";
     private static Context context = null;
     private static String cityID;
@@ -36,14 +36,33 @@ public class WeatherDataService {
         String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityID;
 
         //Get the JSON object
+
         /*
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        String url,
+            @Nullable JSONObject jsonRequest,
+            Listener<JSONObject> listener,
+            @Nullable ErrorListener errorListener
+         */
+
+
+        JsonObjectRequest request = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                onResponse(response);
+
+                try{
+                    //JSONArray consolodated_weather_list = response.getJSONArray()
+                }
+                catch (Exception e){
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
             }
         });
-        */
+
     }
 
     public static String getCityID(String cityName){
