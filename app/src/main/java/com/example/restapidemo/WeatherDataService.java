@@ -18,8 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherDataService {
-    private static final String QUERY_FOR_CITY_WEATHER_BY_ID = "London";
-    private static String query = "https://www.metaweather.com/api/location/search/?query=";
+    private static final String QUERY_FOR_CITY_WEATHER_BY_ID = "https://www.metaweather.com/api/location/search/?query=";
     private static Context context = null;
     private static String cityID;
 
@@ -66,7 +65,7 @@ public class WeatherDataService {
     }
 
     public static String getCityID(String cityName){
-        String url = query + cityName;
+        String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityName;
         JsonArrayRequest request = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
 
             /**
@@ -121,10 +120,6 @@ public class WeatherDataService {
     }
 
     /*
-    public List<WeatherReportModel> getCityForecastByID(String cityID){
-
-    }
-
     public List<WeatherReportModel> getCityForecastByName(String cityName){
 
     }
