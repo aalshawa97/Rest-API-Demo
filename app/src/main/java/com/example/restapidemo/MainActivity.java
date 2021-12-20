@@ -15,9 +15,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import java.util.List;
 
 //JSON meta data: https://www.metaweather.com/api/location/44418/
 public class MainActivity extends AppCompatActivity {
+    private static final String QUERY_FOR_CITY_WEATHER_BY_ID = "";
     Button btn_cityID, btn_getWeatherByID, getBtn_getWeatherByName;
     EditText et_dataInput;
     ListView lv_weatherReport;
@@ -34,6 +37,32 @@ public class MainActivity extends AppCompatActivity {
 
     //Default value for city if not provided by the user.
     String cityName = "Phoenix";
+    WeatherDataService weatherDataService = new WeatherDataService();
+
+    public void getCityForecaseByID(String cityID) {
+        List<WeatherReportModel> report = new ArrayList<>();
+        String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityID;
+
+        //Get the JSON object
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("Get city forecast by ID", "onResponse: ");
+                try {
+                    JSONArray consolodated_weather_list = response.getJSONArray("consolodated_weather");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +77,13 @@ public class MainActivity extends AppCompatActivity {
         lv_weatherReport = findViewById(R.id.weather_data);
 
         //Set the listeners for each button
-        btn_getWeatherByID.setOnClickListener(new View.OnClickListener(){
+        btn_getWeatherByID.setOnClickListener(new View.OnClickListener() {
             @Override
             //This method runs everytime the get weather by ID is taken
             public void onClick(View v) {
+                //weatherDataService
                 Toast.makeText(MainActivity.this, "You clicked get weather by ID", Toast.LENGTH_LONG);
-                Log.d("Ran","Getting the weather ID");
+                Log.d("Ran", "Getting the weather ID");
             }
         });
 
@@ -66,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 WeatherDataService weatherDataService = new WeatherDataService();
                 String cityID = WeatherDataService.getCityID(et_dataInput.getText().toString());
                 Toast.makeText(MainActivity.this, "You clicked get city by ID", Toast.LENGTH_LONG);
-                Log.d("Ran","Searching for the city ID");
+                Log.d("Ran", "Searching for the city ID");
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
                 String url = "https://www.metaweather.com/api/location/search/?query=london";
                 JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -77,12 +107,12 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "Something is wrong.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(MainActivity.this, "Something is wrong.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                 queue.add(request);
                 MySingleton.getInstance(MainActivity.this).addToRequestQueue(request);
                 //Test a string response from the provided URL.
@@ -94,8 +124,10 @@ public class MainActivity extends AppCompatActivity {
                 //startActivity(new Intent(MainActivityJ.this,DecryptionPopup.class));
                 //MySingleton.getInstance(MainActivity.this).addRequestToQueue(request);
             }
-
         });
+
+
+
         /*
         btn_cityID.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -30,6 +30,7 @@ public class WeatherDataService {
     public static String getCityID(String cityName){
         String url = query + cityName;
         JsonArrayRequest request = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
+
             /**
              * Called when a response is received.
              *
@@ -38,6 +39,9 @@ public class WeatherDataService {
             @Override
             public void onResponse(JSONArray response) {
                 try {
+                    Log.d("Weather data service", "onResponse: ");
+
+                    //
                     cityID = "";
                     JSONObject cityInfo = null;
                     cityID = cityInfo.getString("woeid");
