@@ -30,25 +30,22 @@ public class WeatherDataService {
 
     }
 
+    public interface ForeCastByIDResponse{
+        void onError(String message);
+        void onResponse(String cityID);
+    }
+
     public void getCityForecastByID(String cityID){
-        List<WeatherReportModel> report = new ArrayList<>();
+        List<WeatherReportModel> weatherReportModels = new ArrayList<>();
         String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityID;
 
         //Get the JSON object
-
-        /*
-        String url,
-            @Nullable JSONObject jsonRequest,
-            Listener<JSONObject> listener,
-            @Nullable ErrorListener errorListener
-         */
-
-
         JsonObjectRequest request = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
                 try{
+                    Toast.makeText(context, response.toString(),Toast.LENGTH_LONG).show();
                     //JSONArray consolodated_weather_list = response.getJSONArray()
                 }
                 catch (Exception e){
