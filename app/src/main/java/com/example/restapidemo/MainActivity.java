@@ -31,13 +31,14 @@ public class MainActivity extends AppCompatActivity {
     Button btn_cityID, btn_getWeatherByID, getBtn_getWeatherByName;
     EditText et_dataInput;
     ListView lv_weatherReport;
+    final WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
 
     //This is the data                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        that will be shown in the listview component.;
     List<WeatherReportModel> forecastList = new ArrayList<>();
 
     //Default value for city if not provided by the user.
     String cityName = "Phoenix";
-    WeatherDataService weatherDataService = new WeatherDataService();
+    //WeatherDataService weatherDataService = new WeatherDataService();
 
     public void getCityForecaseByID(String cityID) {
         List<WeatherReportModel> report = new ArrayList<>();
@@ -86,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Ran", "Getting the weather ID");
             }
         });
-
-        final WeatherDataService weatherDataService = new WeatherDataService(MainActivity.this);
 
         btn_cityID.setOnClickListener(new View.OnClickListener() {
             @Override
