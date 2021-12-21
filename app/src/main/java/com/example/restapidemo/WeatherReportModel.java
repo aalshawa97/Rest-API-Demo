@@ -32,5 +32,9 @@ public class WeatherReportModel {
        this.visibility = visibility;
        this.predictability = predictability;
     }
+
+    public WeatherReportModel() {
+
+    }
 }
 

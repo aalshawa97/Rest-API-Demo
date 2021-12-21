@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -85,6 +86,24 @@ public class MainActivity extends AppCompatActivity {
                 //weatherDataService
                 Toast.makeText(MainActivity.this, "You clicked get weather by ID", Toast.LENGTH_LONG);
                 Log.d("Ran", "Getting the weather ID");
+                weatherDataService.getCityForecastByID(et_dataInput.getText().toString(), new WeatherDataService.ForeCastByIDResponse() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_LONG);
+                    }
+
+                    @Override
+                    public void onResponse(String cityID) {
+
+                    }
+
+                    @Override
+                    public void onResponse(List<WeatherReportModel> weatherReportModels) {
+                            //Put the entire list into the listview control
+                            ArrayAdapter arrayAdapter = new ArrayAdapter (MainActivity.this, android.R.layout.simple_list_item_1, weatherReportModels);
+                                lv_weatherReport.setAdapter(arrayAdapter);
+                        }
+                });
             }
         });
 
@@ -93,7 +112,23 @@ public class MainActivity extends AppCompatActivity {
             //This method runs everytime the city ID button is clicked
             public void onClick(View v) {
                 WeatherDataService weatherDataService = new WeatherDataService();
-                String cityID = WeatherDataService.getCityID(et_dataInput.getText().toString());
+                String cityID = WeatherDataService.getCityID(et_dataInput.getText().toString(), new VolleyResponseListener() {
+                //This did not return anything
+                    //weatherDataService.getCityID(et_dataInput.getText().toString(), new WeatherDataService.VolleyResponseListener(){})
+
+                    @Override
+                    public void onError(String message) {
+                    }
+
+                    @Override
+                    public void onResponse(Object response) {
+                    }
+
+                    @Override
+                    public void onResponse(List<WeatherReportModel> weatherReportModels) {
+                        
+                    }
+                });
                 Toast.makeText(MainActivity.this, "You clicked get city by ID", Toast.LENGTH_LONG);
                 Log.d("Ran", "Searching for the city ID");
                 RequestQueue queue = Volley.newRequestQueue(MainActivity.this);

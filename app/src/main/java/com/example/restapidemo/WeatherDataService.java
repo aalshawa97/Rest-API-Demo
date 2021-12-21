@@ -3,10 +3,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
-import com.android.volley.Request;
 import com.android.volley.Response;
+//import com.android.volley.Voll
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -33,9 +31,11 @@ public class WeatherDataService {
     public interface ForeCastByIDResponse{
         void onError(String message);
         void onResponse(String cityID);
+
+        void onResponse(List<WeatherReportModel> weatherReportModels);
     }
 
-    public void getCityForecastByID(String cityID){
+    public void getCityForecastByID(String cityID, ForeCastByIDResponse foreCastByIDResponse){
         List<WeatherReportModel> weatherReportModels = new ArrayList<>();
         String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityID;
 
@@ -46,7 +46,13 @@ public class WeatherDataService {
 
                 try{
                     Toast.makeText(context, response.toString(),Toast.LENGTH_LONG).show();
-                    //JSONArray consolodated_weather_list = response.getJSONArray()
+                    JSONArray consolodated_weather_list = response.getJSONArray("consolodated_weather");
+
+                    //Get the first item in the array
+                    for(int i = 0; i < consolodated_weather_list.length(); i++){
+                        WeatherReportModel one_day_weather = new WeatherReportModel();
+                        //JSONObject first_day_from_api = (JSONObject) consolodated_weather_list(i);
+                    }
                 }
                 catch (Exception e){
 
@@ -61,7 +67,13 @@ public class WeatherDataService {
 
     }
 
-    public static String getCityID(String cityName){
+    /*
+    private Object consolodated_weather_list(int i) {
+        //return Request;
+    }
+    */
+
+    public static String getCityID(String cityName, VolleyResponseListener volleyResponseListener){
         String url = QUERY_FOR_CITY_WEATHER_BY_ID + cityName;
         JsonArrayRequest request = new JsonArrayRequest(url, new Response.Listener<JSONArray>() {
 
@@ -116,9 +128,34 @@ public class WeatherDataService {
         return cityID;
     }
 
-    /*
-    public List<WeatherReportModel> getCityForecastByName(String cityName){
-
+    public interface GetCityForecastByNameCallback {
+        void onError(String message);
+        void onResponse(List<WeatherReportModel> weatherReportModels);
     }
-    */
+
+
+    public void getCityForecastByName(String cityName, final GetCityForecastByNameCallback getCityForecastByNameCallback){
+        //Fetch the city ID given the city name
+        getCityID(cityName, new VolleyResponseListener(){
+
+            @Override
+            public void onError(String message) {
+
+            }
+
+            @Override
+            public void onResponse(Object response) {
+
+            }
+
+            @Override
+            public void onResponse(List<WeatherReportModel> weatherReportModels) {
+                //We have the weather report
+                getCityForecastByNameCallback.onResponse(weatherReportModels);
+            }
+        });
+        //Fetch the city forecast give the city ID
+    }
+
+
 }
