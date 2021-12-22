@@ -46,47 +46,32 @@ public class WeatherDataService {
 
                 try{
                     Toast.makeText(context, response.toString(),Toast.LENGTH_LONG).show();
-                    JSONArray consolodated_weather_list = response.getJSONArray("consolodated_weather");
+                    JSONArray consolidated_weather_list = response.getJSONArray("consolodated_weather");
 
                     //Get the first item in the array
-                    for(int i = 0; i < consolodated_weather_list.length(); i++){
-                        WeatherReportModel first_day = new WeatherReportModel();
-                        JSONObject first_day_from_api = (JSONObject) consolodated_weather_list.get(i);
-                        first_day.setId(first_day_from_api.getInt("id"));
-                        first_day.setWeather_state_name(first_day_from_api.getString("weather_state_name"));
-                        first_day.setWeather_state_abbr(first_day_from_api.getString("weather_state_abbr"));
-                        first_day.setWind_direction_compass(first_day_from_api.getString("weather_direction_compass"));
-                        first_day.setCreated(first_day_from_api.getString("created"));
-                        first_day.setApplicable_date(first_day_from_api.getString("applicable_date"));
-                        first_day.setMin_temp(first_day_from_api.getLong("min_temp"));
-                        first_day.setMax_temp(first_day_from_api.getLong("max_temp"));
-                        first_day.setThe_temp(first_day_from_api.getLong("the_temp"));
-                        first_day.setWind_speed(first_day_from_api.getLong("wind_speed"));
-                        first_day.setWind_direction(first_day_from_api.getLong("wind_direction"));
-                        first_day.setAir_pressure(first_day_from_api.getInt("air_pressure"));
-                        first_day.setHumidity(first_day_from_api.getInt("humidity"));
-                        first_day.setVisibility(first_day_from_api.getLong("visibility"));
-                        first_day.setPredictability(first_day_from_api.getInt("predicitability"));
-
-
-                        /*
-                        this.weather_state_abbr = weather_state_abbr;
-                        this.wind_direction_compass = wind_direction_compass;
-                        this.created = created;
-                        this.applicable_date = applicable_date;
-                        this.min_temp = min_temp;
-                        this.max_temp = max_temp;
-                        this.the_temp = the_temp;
-                        this.wind_speed = wind_speed;
-                        this.air_pressure = air_pressure;
-                        this.humidity = humidity;
-                        this.visibility = visibility;
-                        this.predictability = predictability;
-                        */
+                    for(int i = 0; i < consolidated_weather_list.length(); i++){
+                        WeatherReportModel one_day = new WeatherReportModel();
+                        JSONObject first_day_from_api = (JSONObject) consolidated_weather_list.get(i);
+                        one_day.setId(first_day_from_api.getInt("id"));
+                        one_day.setWeather_state_name(first_day_from_api.getString("weather_state_name"));
+                        one_day.setWeather_state_abbr(first_day_from_api.getString("weather_state_abbr"));
+                        one_day.setWind_direction_compass(first_day_from_api.getString("weather_direction_compass"));
+                        one_day.setCreated(first_day_from_api.getString("created"));
+                        one_day.setApplicable_date(first_day_from_api.getString("applicable_date"));
+                        one_day.setMin_temp(first_day_from_api.getLong("min_temp"));
+                        one_day.setMax_temp(first_day_from_api.getLong("max_temp"));
+                        one_day.setThe_temp(first_day_from_api.getLong("the_temp"));
+                        one_day.setWind_speed(first_day_from_api.getLong("wind_speed"));
+                        one_day.setWind_direction(first_day_from_api.getLong("wind_direction"));
+                        one_day.setAir_pressure(first_day_from_api.getInt("air_pressure"));
+                        one_day.setHumidity(first_day_from_api.getInt("humidity"));
+                        one_day.setVisibility(first_day_from_api.getLong("visibility"));
+                        one_day.setPredictability(first_day_from_api.getInt("predicitability"));
+                        weatherReportModels.add(one_day);
                     }
                 }
                 catch (Exception e){
-
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
