@@ -79,6 +79,13 @@ public class MainActivity extends AppCompatActivity {
         lv_weatherReport = findViewById(R.id.weather_data);
 
         //Set the listeners for each button
+        getBtn_getWeatherByName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Weather by name button clicked", Toast.LENGTH_LONG);
+                Log.d("MainActivity", "onClick: get weather by name");
+            }
+        });
         btn_getWeatherByID.setOnClickListener(new View.OnClickListener() {
             @Override
             //This method runs everytime the get weather by ID is taken
