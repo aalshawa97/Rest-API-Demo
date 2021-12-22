@@ -31,14 +31,16 @@
     <EditText
         android:id="@+id/et_dataInput"
         android:layout_width="401dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginStart="4dp"
         android:layout_marginTop="19dp"
         android:inputType="text"
+        android:hint="@string/data_input"
         android:minHeight="48dp"
         android:text="@string/data_input"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weather_name" />
+        app:layout_constraintTop_toBottomOf="@+id/weather_name"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/weather_name"
