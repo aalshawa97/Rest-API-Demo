@@ -1,7 +1,15 @@
 <resources>
-    <string name="app_name">RESTapiDemo</string>
-    <string name="get_city">Weather by ID</string>
-    <string name="get_city_id">Get city ID</string>
-    <string name="data_input">City name</string>
-    <string name="weather_by_name">Weather by name</string>
+    <string name="app_name">WeatherApp</string>
+    <string name="get_city_id">Get City ID</string>
+    <string name="city_name">City Name</string>
+    <string name="weather_by_name">Weather by Name</string>
+    <string name="weather_by_id">Weather by ID</string>
+    <string name="show_city_id">Show City ID</string>
+    <string name="city_id_city_name">City ID / City Name</string>
+    <string name="text">text</string>
+    <string name="_02_09_2021">02-09-2021</string>
+    <string name="snow">Snow</string>
+    <string name="_10_c">10 C</string>
+    <string name="min_7c">Min: 7C</string>
+    <string name="max_20c">Max: 20C</string>
 </resources>
