@@ -39,6 +39,18 @@ public class WeatherReportModel {
 
     }
 
+    @Override
+    public String toString() {
+        return weather_state_name + "Date:" + applicable_date + '\'' +
+                ", Lo: " + min_temp +
+                ", max_temp=" + max_temp +
+                ", the_temp=" + the_temp;
+    }
+
+    public int getId(){
+        return id;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
