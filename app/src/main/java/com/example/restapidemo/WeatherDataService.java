@@ -108,6 +108,8 @@ public class WeatherDataService {
                     //
                     cityID = "";
                     JSONObject cityInfo = null;
+                    //Set the city info
+                    cityInfo = response.getJSONObject(0);
                     cityID = cityInfo.getString("woeid");
                 } catch (Exception e) {
                     e.printStackTrace();
