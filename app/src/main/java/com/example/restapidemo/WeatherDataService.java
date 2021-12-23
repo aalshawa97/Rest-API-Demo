@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherDataService {
+    private static final String QUERY_FOR_CITY_ID = "https://www.metaweather.com/api/location/search/?query";
     private static final String QUERY_FOR_CITY_WEATHER_BY_ID = "https://www.metaweather.com/api/location/search/?query=";
     private static Context context = null;
     private static String cityID;
